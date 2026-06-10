@@ -27,5 +27,13 @@ The pixel creatures will wander around looking for food, water, and potential ma
 
 Disease cells only show up if the population starts to get too dense. They will hunt down pixel creatures and kill any that they touch.
 
+Example:
+
+<img width="740" height="482" alt="image" src="https://github.com/user-attachments/assets/c62cd9fb-31ef-446e-9965-b0cd6b41c962" />
+
+
 ## Credits
 P1x3l-W0lf: dev
+
+## Other
+I'm trying out a new ReadMe format. I think it looks much better.
