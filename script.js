@@ -70,7 +70,7 @@ function init() {
 
         runSim();
     })
-    for (let i = 0; i < 5; i++){
+    for (let i = 0; i < 8; i++){
         let creatureYPos;
         let creatureXPos;
 
@@ -79,10 +79,14 @@ function init() {
             creatureXPos = Math.floor(Math.random()*40);
         } while (grid[creatureYPos][creatureXPos] !== "");
 
-        createCreature([Math.floor(Math.random()*16)+5, Math.floor(Math.random()*17)+4, creatureXPos, creatureYPos]);
+        if (Math.floor(Math.random()*3) === 1) {
+            createCreature([Math.floor(Math.random() * 10) + 5, Math.floor(Math.random() * 10) + 4, creatureXPos, creatureYPos]);
+        } else {
+            createCreature([Math.floor(Math.random() * 3) + 5, Math.floor(Math.random() * 3) + 4, creatureXPos, creatureYPos]);
+        }
     }
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 1; i++) {
         createFood();
         createWater();
     }
