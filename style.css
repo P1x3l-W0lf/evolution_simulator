@@ -10,9 +10,17 @@ body{
     justify-content: center;
 }
 
+p{
+    margin: -3px 0;
+}
+
+input{
+    margin-bottom: 5px;
+}
+
 #container{
     display: flex;
-    height: 450px;
+    height: 455px;
 }
 
 #stat-table{
@@ -23,6 +31,7 @@ body{
 }
 
 #header{
+    margin-top: -15px;
     align-content: center;
     text-align: center;
     justify-content: center;
@@ -38,7 +47,7 @@ body{
 .row{
     display: flex;
     border-top: 2px solid rgb(84 84 152 / 0.6);
-    height: auto;
+    height: 75px;
     justify-content: center;
     align-items: center;
 }

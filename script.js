@@ -5,6 +5,8 @@ let creatures = {};
 let nextCreatureID = 1;
 let openIDs = [];
 let diseaseCells = [];
+let speed = 1;
+let move;
 
 function createCreature(stats) {
     if (Object.keys(creatures).length <= 100) {
@@ -62,6 +64,12 @@ function init() {
             document.getElementById("grid").appendChild(newItem);
         }
     }
+    document.getElementById("speedDial").addEventListener("change", function(event){
+        speed = event.target.value;
+        document.getElementById("speedDisplay").innerHTML = speed;
+
+        runSim();
+    })
     for (let i = 0; i < 5; i++){
         let creatureYPos;
         let creatureXPos;
@@ -297,51 +305,56 @@ class creature {
     }
 }
 
+function runSim() {
+    if (move) clearInterval(move);
+
+    move = setInterval(() => {
+        let maleCount = 0;
+        let femaleCount = 0;
+        let hungerMaxSum = 0;
+        let thirstMaxSum = 0;
+        Object.keys(creatures).forEach((key) => {
+            if (creatures[key]) {
+                hungerMaxSum += creatures[key].hungerMax;
+                thirstMaxSum += creatures[key].thirstMax;
+                creatures[key].walk();
+                if (creatures[key].gender === "male") {
+                    maleCount++;
+                    if (creatures[key].breedTimeout <= 0) {
+                        creatures[key].breed();
+                    }
+                } else {
+                    femaleCount++;
+                }
+            }
+        })
+
+        document.getElementById("creatureCount").innerHTML = Object.keys(creatures).length.toString();
+        document.getElementById("genderRatio").innerHTML = `${maleCount}/${femaleCount}`;
+        document.getElementById("avgHunger").innerHTML = (hungerMaxSum / Object.keys(creatures).length).toFixed(2);
+        document.getElementById("avgThirst").innerHTML = (thirstMaxSum / Object.keys(creatures).length).toFixed(2);
+
+        if (Object.keys(creatures).length > 50 && diseaseCells.length < 15) {
+            for (let i = 0; i < (15 - diseaseCells.length); i++) {
+                let diseaseYPos;
+                let diseaseXPos;
+
+                do {
+                    diseaseYPos = Math.floor(Math.random() * 40);
+                    diseaseXPos = Math.floor(Math.random() * 40);
+                } while (grid[diseaseYPos][diseaseXPos] !== "");
+
+                diseaseCells.push(new disease(i, diseaseXPos, diseaseYPos))
+            }
+        }
+        if (diseaseCells.length > 0) {
+            for (let i = 0; i < diseaseCells.length; ++i) {
+                diseaseCells[i].spread()
+            }
+        }
+    }, 1000/speed);
+}
 
 init()
 
-move = setInterval(() => {
-    let maleCount = 0;
-    let femaleCount = 0;
-    let hungerMaxSum = 0;
-    let thirstMaxSum = 0;
-    Object.keys(creatures).forEach((key) => {
-        if (creatures[key]) {
-            hungerMaxSum += creatures[key].hungerMax;
-            thirstMaxSum += creatures[key].thirstMax;
-            creatures[key].walk();
-            if (creatures[key].gender === "male") {
-                maleCount++;
-                if (creatures[key].breedTimeout <= 0) {
-                    creatures[key].breed();
-                }
-            } else {
-                femaleCount++;
-            }
-        }
-    })
-
-    document.getElementById("creatureCount").innerHTML = Object.keys(creatures).length.toString();
-    document.getElementById("genderRatio").innerHTML = `${maleCount}/${femaleCount}`;
-    document.getElementById("avgHunger").innerHTML = (hungerMaxSum / Object.keys(creatures).length).toFixed(2);
-    document.getElementById("avgThirst").innerHTML = (thirstMaxSum / Object.keys(creatures).length).toFixed(2);
-
-    if (Object.keys(creatures).length > 50 && diseaseCells.length < 50){
-        for (let i = 0; i < (50 - diseaseCells.length); i++) {
-            let diseaseYPos;
-            let diseaseXPos;
-
-            do {
-                diseaseYPos = Math.floor(Math.random()*40);
-                diseaseXPos = Math.floor(Math.random()*40);
-            } while (grid[diseaseYPos][diseaseXPos] !== "");
-
-            diseaseCells.push(new disease(i, diseaseXPos, diseaseYPos))
-        }
-    }
-    if (diseaseCells.length > 0) {
-        for (let i = 0; i < diseaseCells.length; ++i) {
-            diseaseCells[i].spread()
-        }
-    }
-}, 1000);
+runSim();

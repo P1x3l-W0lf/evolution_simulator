@@ -10,12 +10,19 @@
 </head>
 <body>
     <h1>Evolution</h1>
+    <label for="speedDial">Adjust the Simulation Speed</label>
+    <p>↓↓↓</p>
+    <input type="range" id="speedDial" min="1" max="10" value="1" step="1">
     <div id="container">
         <div id="stat-table">
             <div id="header">
                 <h3>~ STATS ~</h3>
             </div>
             <div id="table">
+                <div class="row">
+                    <h4>Simulation Speed:</h4>
+                    <h4 class="stat" id="speedDisplay">1</h4>
+                </div>
                 <div class="row">
                     <h4>Creature Count:</h4>
                     <h4 class="stat" id="creatureCount">0</h4>
