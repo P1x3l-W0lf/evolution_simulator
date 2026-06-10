@@ -10,6 +10,43 @@ body{
     justify-content: center;
 }
 
+#container{
+    display: flex;
+    height: 450px;
+}
+
+#stat-table{
+    margin-right: 10px;
+    background-color: #31354c;
+    padding: 5px;
+    width: 400px;
+}
+
+#header{
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
+#table{
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.row{
+    display: flex;
+    border-top: 2px solid rgb(84 84 152 / 0.6);
+    height: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.stat{
+    margin-left: 5px;
+}
+
 #grid{
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
@@ -22,6 +59,24 @@ body{
     width: 10px;
 }
 
-.creature{
-    background-color: rgb(240 240 240);
+.female{
+    background-color: rgb(179 12 154);
+}
+
+.male{
+    background-color: rgb(12 12 179);
+}
+
+.food{
+    background-color: rgb(128 3 3);
+    border: 1px solid rgb(145 92 92 / 0.6);
+}
+
+.water{
+    background-color: rgb(67 159 198);
+    border: 1px solid rgb(58 104 124);
+}
+
+.disease{
+    background-color: rgb(5 195 20);
 }

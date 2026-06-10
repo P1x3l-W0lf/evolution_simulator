@@ -9,7 +9,32 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-<h1>Evolution</h1>
-    <div id="grid"></div>
+    <h1>Evolution</h1>
+    <div id="container">
+        <div id="stat-table">
+            <div id="header">
+                <h3>~ STATS ~</h3>
+            </div>
+            <div id="table">
+                <div class="row">
+                    <h4>Creature Count:</h4>
+                    <h4 class="stat" id="creatureCount">0</h4>
+                </div>
+                <div class="row">
+                    <h4>Male/Female Ratio:</h4>
+                    <h4 class="stat" id="genderRatio">0/0</h4>
+                </div>
+                <div class="row">
+                    <h4>Average Hunger Capacity:</h4>
+                    <h4 class="stat" id="avgHunger">0</h4>
+                </div>
+                <div class="row">
+                    <h4>Average Thirst Capacity:</h4>
+                    <h4 class="stat" id="avgThirst">0</h4>
+                </div>
+            </div>
+        </div>
+        <div id="grid"></div>
+    </div>
 </body>
 </html>
